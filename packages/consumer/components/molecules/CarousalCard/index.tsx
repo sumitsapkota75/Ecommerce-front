@@ -26,6 +26,9 @@ const Wrapper = styled.div`
   .title {
     margin-top: 30px;
     margin-bottom: 5px;
+    p {
+      color: #858282;
+    }
   }
 `;
 
@@ -39,7 +42,7 @@ const CarousalCard = ({ data }) => {
         <p>{data.name}</p>
       </div>
       <div className="price">
-        <h3>Rs, {data.price}</h3>
+        <h3>Rs. {data.price}</h3>
       </div>
     </Wrapper>
   );
