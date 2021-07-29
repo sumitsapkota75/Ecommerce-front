@@ -9,6 +9,7 @@ import { Layout, message } from "antd";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { AuthProvider } from "../utils/AuthContext";
 import styled from "styled-components";
+import "../style.css";
 
 const LayoutWrapper = styled.div`
   width: 100%;

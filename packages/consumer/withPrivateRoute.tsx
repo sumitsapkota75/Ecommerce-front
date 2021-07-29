@@ -13,27 +13,7 @@ const LoaderWrapper = styled.div`
   margin-top: 40px;
 `;
 
-const LayoutWrapper = styled.div`
-  width: calc(100% - 260px);
-
-  & .ant-layout-header {
-    height: 54px;
-    padding: 0 50px;
-    color: rgba(0, 0, 0, 0.85);
-    line-height: 64px;
-    background: #ffffff;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
-  }
-
-  & .ant-layout-content {
-    min-height: 92vh;
-    padding-bottom: 0;
-  }
-
-  & .ant-layout-footer {
-    padding-top: 0;
-  }
-`;
+const LayoutWrapper = styled.div``;
 
 const PrivateRoute = (AuthComponent) => {
   function PrivateComponent({ children }) {
