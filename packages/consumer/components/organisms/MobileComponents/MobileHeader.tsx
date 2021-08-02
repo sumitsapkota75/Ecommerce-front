@@ -28,7 +28,7 @@ const SearchBarWrapper = styled.div`
   max-width: 900px;
   .search-bar {
     padding: 5px;
-    height: 20px;
+    height: 30px;
     max-width: 900px;
     border: 0;
     border-right: none;

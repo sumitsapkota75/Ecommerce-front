@@ -23,6 +23,7 @@ function HomePage() {
 
   return (
     <Wrapper>
+      <button onClick={handleLogout}>Logout</button>
       <Carousal />
       <SecondBanner link="https://www.faurecia.com/sites/groupe/files/pages/StaySafe_banner1300x550.jpg" />
       <TopCategory />
@@ -44,7 +45,6 @@ function HomePage() {
       <ProductByCategory name="Mens Fashion" />
       <SecondBanner link="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/big-sale-banner-design-template-7a455468cdb295f8b7320d6b492c7105_screen.jpg?ts=1602781632" />
       <ProductByCategory name="Organic and Herbal" />
-      <button onClick={handleLogout}>Logout</button>
     </Wrapper>
   );
 }

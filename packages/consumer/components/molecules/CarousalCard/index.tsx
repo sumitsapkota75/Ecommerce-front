@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import Link from "next/link";
 
 const Wrapper = styled.div`
   display: flex;
@@ -16,7 +15,10 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: space-between;
     width: 142px;
-    height: 300px;
+    height: 280px;
+  }
+  h3 {
+    display: block;
   }
   a {
     text-decoration: none;
@@ -45,6 +47,9 @@ const Wrapper = styled.div`
 
     p {
       color: #858282;
+      @media (max-width: 600px) {
+        margin-top: 5px;
+      }
     }
     @media (max-width: 600px) {
       margin-top: 0px;
@@ -65,7 +70,7 @@ const Wrapper = styled.div`
 const CarousalCard = ({ data }) => {
   return (
     <Wrapper>
-      <a href="/product/slug-field">
+      <a href="/product/slug">
         <div className="image">
           <img src={data.img} />
         </div>

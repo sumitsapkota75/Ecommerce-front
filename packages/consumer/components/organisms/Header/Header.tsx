@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import {
-  HeartOutlined,
   SearchOutlined,
   ShoppingCartOutlined,
   UserOutlined,
@@ -16,6 +15,8 @@ const Wrapper = styled.div`
   justify-content: space-around;
   align-items: center;
   background-color: #ffff;
+  position: sticky;
+  top: 10px;
   @media (max-width: 1075px) {
     display: none;
   }
@@ -76,6 +77,7 @@ const SearchBarWrapper = styled.div`
 
 const OtherItems = styled.div`
   display: flex;
+  width: auto;
   color: black;
   font-weight: bold;
   svg {
@@ -84,15 +86,12 @@ const OtherItems = styled.div`
     /* fill: #1b75bb; */
     margin-right: 14px;
   }
-  .wishlist {
-    margin-right: 28px;
-  }
-  .wishlist:hover {
-    cursor: pointer;
-  }
 
-  .cart:hover {
+  .hover:hover {
     cursor: pointer;
+  }
+  .user-icon {
+    margin-left: 40px;
   }
   & .ant-badge-count {
     width: 20px !important;
@@ -131,18 +130,15 @@ const Header = () => {
           </div>
         </SearchBarWrapper>
         <OtherItems>
-          <div className="wishlist">
-            <HeartOutlined />
-            Wishlist
-          </div>
-          <div className="cart">
+          <div className="cart hover">
             {/* <Badge count={5}> */}
             <ShoppingCartOutlined />
             {/* </Badge> */}
             Cart
           </div>
-          <div className="user-icon">
+          <div className="user-icon hover">
             <UserOutlined />
+            Login/Register
           </div>
         </OtherItems>
       </Wrapper>

@@ -1,12 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import { Cart3 } from "@styled-icons/bootstrap/Cart3";
-import { message } from "antd";
+import { CreditCard } from "@styled-icons/boxicons-regular/CreditCard";
 
 const Wrapper = styled.div`
   width: 200px;
   height: 55px;
-  background-color: #1b75bb;
+  background-color: #f05a38;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -17,30 +16,27 @@ const Wrapper = styled.div`
     font-weight: bold;
   }
   &:hover {
-    background-color: #165f97;
+    background-color: #e94723;
     cursor: pointer;
   }
 `;
 
-const CartIcon = styled(Cart3)`
+const CreditCardIcon = styled(CreditCard)`
   color: white;
   max-width: 100px;
   height: 30px;
   margin-right: 20px;
 `;
 
-const AddToCart = () => {
-  const handleAddtoCart = () => {
-    message.success("Item added to cart");
-  };
+const BuyNow = () => {
   return (
     <Wrapper>
-      <CartIcon onClick={handleAddtoCart} />
+      <CreditCardIcon />
       <div>
-        <h3>Add to Cart</h3>
+        <h3>Buy Now</h3>
       </div>
     </Wrapper>
   );
 };
 
-export default AddToCart;
+export default BuyNow;
