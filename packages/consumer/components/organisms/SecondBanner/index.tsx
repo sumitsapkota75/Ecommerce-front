@@ -8,10 +8,18 @@ const Wrapper = styled.div`
   width: 60%;
   margin: 0 auto;
   margin-top: 40px;
+  @media (max-width: 768px) {
+    max-width: 500px;
+    max-height: 200px;
+    margin-top: 20px;
+  }
   img {
     border-radius: 10px;
-    height: 400px;
     width: 100%;
+    @media (max-width: 768px) {
+      max-width: 400px;
+      max-height: 200px;
+    }
   }
 `;
 

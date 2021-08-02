@@ -32,6 +32,7 @@
     "package:owner": "node -r ./dotenv.config.js node_modules/.bin/lerna run --scope owner --stream dev",
     "package:consumer": "node -r ./dotenv.config.js node_modules/.bin/lerna run --scope consumer --stream dev",
     "test": "jest --watch",
+    "build": "lerna run --parallel build",
     "start": "node -r ./dotenv.config.js node_modules/.bin/lerna run --parallel dev",
     "storybook": "start-storybook -p 9009",
     "build-storybook": "build-storybook",

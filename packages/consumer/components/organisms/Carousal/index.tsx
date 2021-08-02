@@ -14,25 +14,26 @@ const Wrapper = styled.div`
   .thumbs-wrapper {
     display: none;
   }
+  .img {
+    @media (max-width: 1075px) {
+      height: 200px;
+      width: 100%;
+    }
+  }
 `;
 
 const Carousal = () => {
-  const contentStyle = {
-    height: "350px",
-    color: "#bb3030",
-    background: "#364d79",
-  };
   return (
     <Wrapper>
       <Carousel autoPlay infiniteLoop showIndicators={false}>
         <div>
-          <img src={"/carousel1.png"} style={contentStyle}></img>
+          <img className="img" src={"/carousel1.png"}></img>
         </div>
         <div>
-          <img src={"/carousel2.png"} style={contentStyle}></img>
+          <img className="img" src={"/carousel2.png"}></img>
         </div>
         <div>
-          <img src={"/carousal3.png"} style={contentStyle}></img>
+          <img className="img" src={"/carousal3.png"}></img>
         </div>
       </Carousel>
     </Wrapper>

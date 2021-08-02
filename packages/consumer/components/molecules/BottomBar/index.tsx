@@ -13,9 +13,18 @@ const Wrapper = styled.div`
   font-size: 21px;
   color: #858282;
   .image {
-    width: 40px;
-    height: 40px;
+    max-width: 40px;
+    max-height: 40px;
     margin-right: 40px;
+    @media (max-width: 768px) {
+      flex-direction: column;
+      margin-right: 0px;
+      max-width: 20px;
+      max-height: 20px;
+    }
+  }
+  @media (max-width: 768px) {
+    font-size: 14px;
   }
 `;
 

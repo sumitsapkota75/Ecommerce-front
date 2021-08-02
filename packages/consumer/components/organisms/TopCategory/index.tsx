@@ -4,8 +4,13 @@ import styled from "styled-components";
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
-  height: 250px;
   margin-top: 40px;
+  flex-wrap: wrap;
+
+  @media (max-width: 1075px) {
+    border-radius: 50%;
+    margin-top: 10px;
+  }
 `;
 const CardWrapper = styled.div`
   margin-right: 40px;
@@ -13,10 +18,23 @@ const CardWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  @media (max-width: 1130px) {
+    margin-right: 10px;
+    transform: scale(0.8);
+  }
+
   img {
     height: 200px;
     max-width: 200px;
     margin-bottom: 9px;
+    @media (max-width: 1138px) {
+      height: 100px;
+      max-width: 200px;
+    }
+    @media (max-width: 1290px) {
+      height: 200px;
+      max-width: 150px;
+    }
     &:hover {
       transform: scale(0.8);
       transition: all linear 0.2s;

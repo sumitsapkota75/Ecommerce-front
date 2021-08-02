@@ -4,19 +4,31 @@ import styled from "styled-components";
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 300px;
   display: flex;
   justify-content: space-between;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   background-color: #ffff;
   margin-top: 20px;
   color: #858282;
+
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
   .first-section {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     margin-left: 4%;
+    @media (max-width: 768px) {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 50px;
+    }
   }
   .social-sharing {
     display: flex;
@@ -46,6 +58,14 @@ const Wrapper = styled.div`
     & a:hover {
       color: "#f05a38";
     }
+    @media (max-width: 768px) {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      margin-top: 50px;
+    }
   }
   .links {
     margin-bottom: 9px;
@@ -63,6 +83,15 @@ const Wrapper = styled.div`
     justify-content: center;
     align-items: center;
     margin-right: 4%;
+
+    @media (max-width: 768px) {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      margin-top: 50px;
+    }
   }
 `;
 

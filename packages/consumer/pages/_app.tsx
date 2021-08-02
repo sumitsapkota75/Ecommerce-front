@@ -10,10 +10,25 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { AuthProvider } from "../utils/AuthContext";
 import styled from "styled-components";
 import "../style.css";
+import TopBar from "../components/organisms/TopBar";
+import CategoryBar from "../components/organisms/CategoryBar";
+import Header from "../components/organisms/Header/Header";
+import BottomBar from "../components/molecules/BottomBar";
+import Footer from "../components/organisms/Footer";
 
 const LayoutWrapper = styled.div`
   width: 100%;
   overflow-x: auto;
+  .top-bar {
+    @media (max-width: 1075px) {
+      display: none;
+    }
+  }
+  .category-bar {
+    @media (max-width: 1075px) {
+      display: none;
+    }
+  }
 `;
 
 if (process.env.NEXT_PUBLIC_SENTRY_DSN) {
@@ -75,7 +90,16 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
           {user ? (
             <Layout>
               <LayoutWrapper>
+                <div className="top-bar">
+                  <TopBar />
+                </div>
+                <Header />
+                <div className="category-bar">
+                  <CategoryBar />
+                </div>
                 <Component {...pageProps} />
+                <Footer />
+                <BottomBar />
               </LayoutWrapper>
             </Layout>
           ) : (

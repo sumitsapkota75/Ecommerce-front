@@ -3,17 +3,14 @@ import firebase from "firebase";
 import PrivateRoute from "../../withPrivateRoute";
 import Router from "next/router";
 import { AuthContext } from "../../utils/AuthContext";
-import Header from "../../components/organisms/Header/Header";
-import TopBar from "../../components/organisms/TopBar";
-import CategoryBar from "../../components/organisms/CategoryBar";
 import Carousal from "../../components/organisms/Carousal";
 import SecondBanner from "../../components/organisms/SecondBanner";
 import TopCategory from "../../components/organisms/TopCategory";
-import ThirdBanner from "../../components/organisms/ThirdBanner";
 import ProductShowCase from "../../components/organisms/ProductShowCase";
 import ProductByCategory from "../../components/organisms/ProductByCategory";
-import Footer from "../../components/organisms/Footer";
-import BottomBar from "../../components/molecules/BottomBar";
+import styled from "styled-components";
+
+const Wrapper = styled.div``;
 
 function HomePage() {
   const { setUser } = useContext(AuthContext);
@@ -25,14 +22,11 @@ function HomePage() {
   };
 
   return (
-    <>
-      <TopBar />
-      <Header />
-      <CategoryBar />
+    <Wrapper>
       <Carousal />
-      {/* <SecondBanner link="https://www.faurecia.com/sites/groupe/files/pages/StaySafe_banner1300x550.jpg" /> */}
+      <SecondBanner link="https://www.faurecia.com/sites/groupe/files/pages/StaySafe_banner1300x550.jpg" />
       <TopCategory />
-      <ThirdBanner />
+      <SecondBanner link="https://www.edb.gov.sg/content/dam/edb-en/insights/innovation/innovation-in-a-crisis-singapore-flexes-biomed-chops-against-covid-19/Tracking.gif" />
       <ProductByCategory name="Best Selling" />
       <ProductShowCase
         link1="https://www.gyapu.com/5b3401f65bc17212e259cff9954062aa.png"
@@ -50,10 +44,8 @@ function HomePage() {
       <ProductByCategory name="Mens Fashion" />
       <SecondBanner link="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/big-sale-banner-design-template-7a455468cdb295f8b7320d6b492c7105_screen.jpg?ts=1602781632" />
       <ProductByCategory name="Organic and Herbal" />
-      <Footer />
-      <BottomBar />
       <button onClick={handleLogout}>Logout</button>
-    </>
+    </Wrapper>
   );
 }
 

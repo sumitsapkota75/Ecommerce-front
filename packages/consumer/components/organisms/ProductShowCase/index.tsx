@@ -10,9 +10,21 @@ const Wrapper = styled.div`
   margin: 0 auto;
   margin-top: 40px;
   flex-wrap: wrap;
+  @media (max-width: 500px) {
+    max-width: 400px;
+  }
+  @media (max-width: 399px) {
+    max-width: 350px;
+  }
   .img {
     max-width: 500px;
     height: 250px;
+    @media (max-width: 499px) {
+      max-width: 375px;
+    }
+    @media (max-width: 399px) {
+      max-width: 350px;
+    }
   }
 `;
 

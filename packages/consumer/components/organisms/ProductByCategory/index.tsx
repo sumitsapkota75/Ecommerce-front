@@ -52,6 +52,7 @@ const Wrapper = styled.div`
     margin: 0 auto;
     flex-wrap: wrap;
     margin-top: 40px;
+    width: 100vw;
   }
   .carousel-container {
     width: 100%;
