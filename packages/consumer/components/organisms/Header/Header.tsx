@@ -7,6 +7,7 @@ import {
 } from "@ant-design/icons";
 import MobileHeader from "../MobileComponents/MobileHeader";
 import router from "next/router";
+import { Badge } from "antd";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -87,22 +88,28 @@ const OtherItems = styled.div`
     margin-right: 14px;
   }
 
+  .cart {
+    display: flex;
+    position: relative;
+  }
   .hover:hover {
     cursor: pointer;
   }
   .user-icon {
     margin-left: 40px;
   }
-  & .ant-badge-count {
-    width: 20px !important;
-    height: 22px !important;
-    padding: 0px;
-    margin-right: -6px;
-  }
-  & .ant-scroll-number {
-    width: 6px !important;
-    height: 20px !important;
-    font-size: 12px;
+  .badge {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background-color: red;
+    color: white;
+    position: absolute;
+    top: -23px;
+    left: 5px;
   }
 `;
 
@@ -131,9 +138,8 @@ const Header = () => {
         </SearchBarWrapper>
         <OtherItems>
           <div className="cart hover">
-            {/* <Badge count={5}> */}
             <ShoppingCartOutlined />
-            {/* </Badge> */}
+            <div className="badge">5</div>
             Cart
           </div>
           <div className="user-icon hover">
