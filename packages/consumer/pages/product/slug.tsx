@@ -22,7 +22,7 @@ const Wrapper = styled.div`
   .product-list-title {
     display: flex;
     font-size: 33px;
-    margin-bottom: 60px;
+    margin-bottom: 30px;
     margin-top: 40px;
     color: #81818a;
     font-weight: bolder;
@@ -33,12 +33,24 @@ const MainWrapper = styled.div`
   justify-content: center;
   display: flex;
   height: 500px;
+  @media (max-width: 1111px) {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    align-items: center;
+    margin-top: 10px;
+  }
   .img-left {
     max-width: 414px;
     border: 2px solid gray;
-
+    @media (max-width: 768px) {
+      max-width: 300px;
+    }
     img {
       max-width: 414px;
+      @media (max-width: 768px) {
+        max-width: 300px;
+      }
     }
   }
   .detail-center {
@@ -49,11 +61,18 @@ const MainWrapper = styled.div`
       font-size: 32px;
       font-weight: bold;
       color: #81818a;
+      @media (max-width: 768px) {
+        font-size: 21px;
+      }
     }
     .price {
       font-size: 42px;
       font-weight: bold;
       margin-top: 20px;
+      @media (max-width: 768px) {
+        font-size: 24px;
+        margin-top: 10px;
+      }
     }
 
     .available {
@@ -72,9 +91,20 @@ const MainWrapper = styled.div`
     .btns {
       display: flex;
       margin-top: 40px;
+      @media (max-width: 768px) {
+        flex-direction: column;
+      }
     }
     .add-to-cart {
       margin-right: 40px;
+      @media (max-width: 768px) {
+        margin-bottom: 30px;
+      }
+    }
+    .buynow {
+      @media (max-width: 768px) {
+        margin-bottom: 30px;
+      }
     }
   }
   .social-icons {
@@ -92,6 +122,10 @@ const MainWrapper = styled.div`
     flex-direction: column;
     justify-content: flex-start;
     padding: 10px;
+    @media (max-width: 768px) {
+      display: flex;
+      text-align: center;
+    }
 
     h3 {
       color: #81818a;
@@ -201,7 +235,7 @@ const ProductDetailPage = () => {
             <div className="add-to-cart">
               <AddToCart />
             </div>
-            <div className="paynow">
+            <div className="buynow">
               <BuyNow />
             </div>
           </div>

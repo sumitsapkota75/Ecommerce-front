@@ -16,6 +16,8 @@ const Wrapper = styled.div`
     justify-content: space-between;
     width: 142px;
     height: 280px;
+    margin: 0 auto;
+    margin-top: 20px;
   }
   h3 {
     display: block;
