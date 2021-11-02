@@ -1,29 +1,43 @@
-import React, { useContext } from "react";
-import firebase from "firebase";
-import PrivateRoute from "../../withPrivateRoute";
-import Router from "next/router";
-import { AuthContext } from "../../utils/AuthContext";
+import React, { useState, useEffect } from "react";
 import Carousal from "../../components/organisms/Carousal";
 import SecondBanner from "../../components/organisms/SecondBanner";
 import TopCategory from "../../components/organisms/TopCategory";
 import ProductShowCase from "../../components/organisms/ProductShowCase";
 import ProductByCategory from "../../components/organisms/ProductByCategory";
 import styled from "styled-components";
+import { useQuery } from "react-query";
+import { getProducts } from "../../services/products";
+import { GetServerSideProps } from "next";
 
 const Wrapper = styled.div``;
 
 function HomePage() {
-  const { setUser } = useContext(AuthContext);
-
-  const handleLogout = async () => {
-    await firebase.auth().signOut();
-    setUser(null);
-    Router.push("/login");
-  };
+  const [pageSize] = useState(10);
+  const [productData, setProductData] = useState([]);
+  const { data } = useQuery(["getProducts", 1, pageSize], getProducts, {
+    keepPreviousData: false,
+    cacheTime: 0,
+    refetchOnWindowFocus: false,
+  });
+  useEffect(() => {
+    setProductData(
+      data?.data?.map((data: any, index: number) => {
+        return {
+          key: index,
+          id: data.id,
+          company: data.company || "-",
+          email: data.email || "-",
+          name: data.name || "-",
+          memo: data.memo || "-",
+          createdDateTime: data.created_at,
+          updatedDateTime: data.updated_at || "-",
+        };
+      })
+    );
+  }, [data]);
 
   return (
     <Wrapper>
-      <button onClick={handleLogout}>Logout</button>
       <Carousal />
       <SecondBanner link="https://www.faurecia.com/sites/groupe/files/pages/StaySafe_banner1300x550.jpg" />
       <TopCategory />
@@ -49,4 +63,12 @@ function HomePage() {
   );
 }
 
-export default PrivateRoute(HomePage);
+export default HomePage;
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  return {
+    props: {
+      page: context.query?.page || 1,
+    },
+  };
+};

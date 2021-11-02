@@ -1,14 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import {
   SearchOutlined,
   ShoppingCartOutlined,
   UserOutlined,
 } from "@ant-design/icons";
+import { AuthContext } from "../../../utils/AuthContext";
 import MobileHeader from "../MobileComponents/MobileHeader";
-import router from "next/router";
-import { Badge } from "antd";
+import { firebase } from "@project/shared";
+import Router, { useRouter } from "next/router";
+import { Dropdown, Menu } from "antd";
 
+const MainWrapper = styled.div`
+  position: relative;
+`;
 const Wrapper = styled.div`
   width: 100%;
   height: 80px;
@@ -17,7 +22,7 @@ const Wrapper = styled.div`
   align-items: center;
   background-color: #ffff;
   position: sticky;
-  top: 10px;
+  top: 0;
   @media (max-width: 1075px) {
     display: none;
   }
@@ -111,6 +116,10 @@ const OtherItems = styled.div`
     top: -23px;
     left: 5px;
   }
+  .logout {
+    margin-left: 40px;
+    float: right;
+  }
 `;
 
 const MobileHeaderWrapper = styled.div`
@@ -120,8 +129,56 @@ const MobileHeaderWrapper = styled.div`
 `;
 
 const Header = () => {
+  const { user, setUser } = useContext(AuthContext);
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    await firebase.auth().signOut();
+    setUser(null);
+    Router.push("/login");
+  };
+  const handleLoginClick = (e) => {
+    e.preventDefault();
+    if (!user) {
+      router.push("/login");
+    }
+  };
+  const menu = (
+    <Menu>
+      <Menu.Item>
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://www.antgroup.com"
+        >
+          Profile
+        </a>
+      </Menu.Item>
+      <Menu.Item>
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://www.aliyun.com"
+        >
+          My Orders
+        </a>
+      </Menu.Item>
+      <Menu.Item>
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://www.luohanacademy.com"
+        >
+          Track My Order
+        </a>
+      </Menu.Item>
+      <Menu.Item>
+        <a onClick={handleLogout}>Logout</a>
+      </Menu.Item>
+    </Menu>
+  );
   return (
-    <>
+    <MainWrapper>
       <Wrapper>
         <LogoWrapper onClick={() => router.push("/homepage")}>
           <img src={"/logo.png"} />
@@ -142,16 +199,25 @@ const Header = () => {
             <div className="badge">5</div>
             Cart
           </div>
-          <div className="user-icon hover">
-            <UserOutlined />
-            Login/Register
-          </div>
+          {user ? (
+            <Dropdown overlay={menu} placement="bottomLeft">
+              <div className="user-icon hover">
+                <UserOutlined />
+                {"Hello, " + user.displayName}
+              </div>
+            </Dropdown>
+          ) : (
+            <div onClick={handleLoginClick} className="user-icon hover">
+              <UserOutlined />
+              Login/Register
+            </div>
+          )}
         </OtherItems>
       </Wrapper>
       <MobileHeaderWrapper>
         <MobileHeader />
       </MobileHeaderWrapper>
-    </>
+    </MainWrapper>
   );
 };
 

@@ -5,16 +5,18 @@ import React, { useEffect, useState } from "react";
 import "../utils/css-imports";
 import { useRouter } from "next/router";
 import firebase from "firebase";
-import { Layout, message } from "antd";
+import { Layout } from "antd";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { AuthProvider } from "../utils/AuthContext";
 import styled from "styled-components";
+import "antd/dist/antd.css";
 import "../style.css";
-import TopBar from "../components/organisms/TopBar";
-import CategoryBar from "../components/organisms/CategoryBar";
+// import TopBar from "../components/organisms/TopBar";
+// import CategoryBar from "../components/organisms/CategoryBar";
 import Header from "../components/organisms/Header/Header";
-import BottomBar from "../components/molecules/BottomBar";
+// import BottomBar from "../components/molecules/BottomBar";
 import Footer from "../components/organisms/Footer";
+import { ChakraProvider } from "@chakra-ui/react";
 
 const LayoutWrapper = styled.div`
   width: 100%;
@@ -41,9 +43,10 @@ if (process.env.NEXT_PUBLIC_SENTRY_DSN) {
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   const routers = useRouter();
-  const [loading, setLoading] = useState(true);
+  const [loading] = useState(false);
   const [user, setUser] = useState(null as firebase.User | null);
   const [collapse, setCollapse] = useState(false);
+  const [isOnVerification, setIsOnVerification] = useState(false);
   useEffect(() => {
     if (process.env.NODE_ENV === "production") {
       const logEvent = (url: string) => {
@@ -61,22 +64,6 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
       };
     }
   }, []);
-  const initialLoad = () => {
-    firebase.auth().onAuthStateChanged(async (user) => {
-      try {
-        if (user !== null) {
-          // const idToken = await user!.getIdTokenResult();
-          setUser(user);
-        }
-        setLoading(false);
-      } catch (error) {
-        message.error("Error occurred");
-      }
-    });
-  };
-  useEffect(() => {
-    initialLoad();
-  }, []);
 
   useEffect(() => {
     setCollapse(collapse);
@@ -86,25 +73,29 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <>
       <QueryClientProvider client={queryClient}>
-        <AuthProvider loading={loading} user={user} setUser={setUser}>
-          {user ? (
+        <AuthProvider
+          loading={loading}
+          user={user}
+          setUser={setUser}
+          isOnVerification={isOnVerification}
+          setIsOnVerification={setIsOnVerification}
+        >
+          <ChakraProvider>
             <Layout>
               <LayoutWrapper>
-                <div className="top-bar">
-                  <TopBar />
-                </div>
+                {/* <div className="top-bar">
+                <TopBar />
+              </div> */}
                 <Header />
-                <div className="category-bar">
-                  <CategoryBar />
-                </div>
+                {/* <div className="category-bar">
+                <CategoryBar />
+              </div> */}
                 <Component {...pageProps} />
                 <Footer />
-                <BottomBar />
+                {/* <BottomBar /> */}
               </LayoutWrapper>
             </Layout>
-          ) : (
-            <Component {...pageProps} />
-          )}
+          </ChakraProvider>
         </AuthProvider>
       </QueryClientProvider>
     </>

@@ -1,11 +1,12 @@
 import { Button, firebase } from "@project/shared";
 import { useFormik } from "formik";
-import React, { useCallback } from "react";
-import { message } from "antd";
-import { useTranslation } from "react-i18next";
+import React, { useCallback, useContext } from "react";
 import Head from "next/head";
 import styled from "styled-components";
 import RestrictedRoute from "../../withRestrictedRoute";
+import { AuthContext } from "../../utils/AuthContext";
+import router from "next/router";
+import { useToast, Spinner } from "@chakra-ui/react";
 
 interface LoginType {
   email: string;
@@ -82,9 +83,9 @@ const InputFieldWrapper = styled.div`
 `;
 
 const LoginPage: React.FC = () => {
-  const { t } = useTranslation();
   const [loading, setLoading] = React.useState(false);
-
+  const toast = useToast();
+  const { setUser } = useContext(AuthContext);
   const handleLoginFormSubmit = () => {
     handleLogin();
   };
@@ -98,25 +99,53 @@ const LoginPage: React.FC = () => {
   const handleLogin = useCallback(async () => {
     setLoading(true);
     try {
-      const data = await firebase
+      await firebase
         .auth()
         .signInWithEmailAndPassword(
           formik.values.email,
           formik.values.password
         );
-      if (!data || !data.user || !firebase.auth().currentUser) {
+      const currentUser = await firebase.auth().currentUser;
+      if (currentUser) {
+        await setUser(currentUser);
+        router.push("/homepage");
+      } else {
         return;
       }
     } catch (error) {
       const errorCode = error.code;
       if (errorCode === "auth/user-not-found") {
-        message.error(t("Email or password doesnot match"));
+        toast({
+          position: "top",
+          title: "Email or password doesnot match",
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+        });
       } else if (errorCode === "auth/wrong-password") {
-        message.error(t("Email or password doesnot match"));
+        toast({
+          position: "top",
+          title: "Email or password doesnot match",
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+        });
       } else if (errorCode === "auth/invalid-email") {
-        message.error(t("Email or password doesnot match"));
+        toast({
+          position: "top",
+          title: "Email or password doesnot match",
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+        });
       } else {
-        message.error(t("An error has occurred. Please try again later."));
+        toast({
+          position: "top",
+          title: "An error has occurred. Please try again later.",
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+        });
       }
     }
     setLoading(false);
@@ -128,6 +157,10 @@ const LoginPage: React.FC = () => {
         <title>Login</title>
       </Head>
       <Container>
+        <div>
+          {" "}
+          <img style={{ width: "500px", height: "200px" }} src="/logo.png" />
+        </div>
         <LoginWrapper>
           <h3 className="heading">Login</h3>
           <TextFieldWrapper>
@@ -148,8 +181,8 @@ const LoginPage: React.FC = () => {
                   value={formik.values.password}
                 />
               </InputFieldWrapper>
-              <StyledButton htmlType="submit" type="primary">
-                {!loading ? "Login" : "Loading"}
+              <StyledButton disabled={loading} htmlType="submit" type="primary">
+                {!loading ? "Login" : <Spinner />}
               </StyledButton>
             </form>
           </TextFieldWrapper>

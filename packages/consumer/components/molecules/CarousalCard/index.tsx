@@ -60,7 +60,7 @@ const Wrapper = styled.div`
     }
   }
   .price {
-    margin-top: 30px;
+    margin-top: 10px;
 
     @media (max-width: 600px) {
       margin-top: 0px;

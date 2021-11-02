@@ -13,6 +13,9 @@ const Wrapper = styled.div`
   max-width: 90%;
   flex-direction: row;
   margin: 0 auto;
+  @media (max-width: 768px) {
+    max-width: 100%;
+  }
   .similar-product {
     display: flex;
     flex-direction: row;
