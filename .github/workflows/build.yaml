@@ -1,0 +1,13 @@
+name: build-app
+
+on:
+  push: 
+    branches: [develop]
+
+jobs:
+  build-the-app: 
+    runs-on: ubuntu-latest
+    environment: development
+    steps: 
+      - name: Checkout code
+        uses: actions/checkout@v2
