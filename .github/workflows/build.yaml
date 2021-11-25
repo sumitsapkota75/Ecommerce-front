@@ -17,3 +17,4 @@ jobs:
           echo "sumit"
           echo ${{ secrets.SLACK_WEBHOOK_URL }}
           echo ${{ secrets.SLACK_WEBHOOK_URL2 }}
+          echo "last"
