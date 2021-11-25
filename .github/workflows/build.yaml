@@ -11,3 +11,9 @@ jobs:
     steps: 
       - name: Checkout code
         uses: actions/checkout@v2
+
+      - name: Get environment variables
+        run: |
+        echo "sumit"
+        echo ${{ secrets.SLACK_WEBHOOK_URL }}
+        echo ${{ secrets.SLACK_WEBHOOK_URL2 }}
